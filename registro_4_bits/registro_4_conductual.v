@@ -1,14 +1,17 @@
-/*------Codigo verilog creado por Jorge Munoz Taylor----------*/
-/*--------Verilog code created by Jorge Munoz Taylor-----------*/
+/*---------------Jorge Munoz Taylor---------------*/
+/*--------------------A53863----------------------*/
+/*-----------Universidad de Costa Rica------------*/
+/*------------Circuitos Digitales 2---------------*/
+/*-------------------I-2018-----------------------*/
 
 module register4(
 	CLK, //Clock input
-	ENB, //Counter enable, if 1 works normally, if 0 maintain current state 
-	DIR, //If 0 shift to the left, if 1 shift to the right
+	ENB, //Counter enable, si es 1 trabaja normalmente, si es 0 se mantiene 
+	DIR, //Si es 0 se desplaza a la izquierda, 0 a la derecha
 	S_IN, //Ripple carry input
-	MODO, //Switch from 3 operation modes
-	D, //Paralell input
-	Q, //Parallel output
+	MODO, //Cambia los modos de operacion
+	D, //Entrada paralela
+	Q, //Salida en paralelo
 	S_OUT //Ripple carry output
 );
  
@@ -33,9 +36,11 @@ module register4(
 			if(DIR == 0) S_OUT = Q[3];
 			if(DIR == 1) S_OUT = Q[0];
 		end
+		else
+			S_OUT = 0;
 	end
 
-	always @(posedge CLK) /*The changes occurs in the pos. edge*/
+	always @(posedge CLK) /*Los cambios ocurren en el flanco positivo*/
 	begin
 		if(ENB == 1)
 		begin
@@ -77,4 +82,4 @@ module register4(
 	end
 
 endmodule
-/*---------------------------------------------r------*/
+/*----------------------------------------------------*/
