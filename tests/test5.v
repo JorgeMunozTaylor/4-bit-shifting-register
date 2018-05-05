@@ -1,11 +1,9 @@
 /*---------------Jorge Munoz Taylor---------------*/
-/*--------------------A53863----------------------*/
-/*-----------Universidad de Costa Rica------------*/
-/*------------Circuitos Digitales 2---------------*/
+/*-----------University of Costa Rica-------------*/
+/*--------------Digital Circuits 2----------------*/
 /*-------------------I-2018-----------------------*/
 
-/*Prueba 5*/
-module Test5( /*Carga en paralelo*/
+module Test5( /*Parallel load*/
 	CLK,
 	ENB,
 	DIR,
@@ -14,7 +12,7 @@ module Test5( /*Carga en paralelo*/
 	D, 
 	Q,
 	S_OUT
-	);
+);
 
 	output CLK;
 	output ENB;
@@ -36,89 +34,26 @@ module Test5( /*Carga en paralelo*/
 	initial CLK 	= `LOW;
 	initial	ENB 	= !(`ENABLE);
 	initial DIR 	= `LOW; 
-	initial MODO 	= `MODO_10;
+	initial MODO 	= `PARA_LOAD;
 	initial S_IN 	= `LOW;
 	initial D 		= 4'b0000;
 	
-	initial
-	begin
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
+	always #`CLK_t5 CLK = !CLK; 
 
-		D = 4'b0010;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1111;
-		
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b0011;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b0100;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b0101;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b0110;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b0111;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1000;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1001;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1010;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1011;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1100;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1101;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1110;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-
-		D = 4'b1111;
-
-	  	#`CLK_t5 CLK = `HIGH; 
-		#`CLK_t5 CLK = `LOW;
-	end
+	initial	#(2*`CLK_t5)  D = 4'b0010;
+	initial	#(4*`CLK_t5)  D = 4'b1111;
+	initial	#(6*`CLK_t5)  D = 4'b0011;
+	initial	#(8*`CLK_t5)  D = 4'b0100;
+	initial	#(10*`CLK_t5) D = 4'b0101;
+	initial	#(12*`CLK_t5) D = 4'b0110;
+	initial	#(14*`CLK_t5) D = 4'b0111;
+	initial	#(16*`CLK_t5) D = 4'b1000;
+	initial	#(18*`CLK_t5) D = 4'b1001;
+	initial	#(20*`CLK_t5) D = 4'b1010;
+	initial	#(22*`CLK_t5) D = 4'b1011;
+	initial	#(24*`CLK_t5) D = 4'b1100;
+	initial	#(26*`CLK_t5) D = 4'b1101;
+	initial	#(28*`CLK_t5) D = 4'b1110;
+	initial	#(30*`CLK_t5) D = 4'b1111;
 
 endmodule

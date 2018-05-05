@@ -1,0 +1,54 @@
+library(demo){
+
+    cell (buffer)   {
+        pin (in)    {direction:input;}
+        pin (out)   {direction:output;
+                     function:"in";}
+    }
+
+    cell (inverter) {
+        pin (in)    { direction:input;}
+        pin (out)   { direction:output;
+                      function: "in'";}
+    }
+
+    cell (NOR) {
+        pin (in1)   {direction:input;}
+        pin (in2)   {direction:input;}
+        pin (out)   {direction:output;
+                     function: "(in1+in2)'";}
+    }
+
+    cell (NAND) {
+        pin (in1)   {direction:input;}
+        pin (in2)   {direction:input;}
+        pin (out)   {direction:output;
+                     function: "(in1*in2)'";}
+    }
+
+    cell (MUX) {
+        pin (in1)   {direction:input;}
+        pin (in2)   {direction:input;}
+        pin (enb)   {direction:input;}
+        pin (sel)   {direction:input;}
+        pin (out)   {direction:output;
+                     function:"(enb)'*( ((sel)'*in1) + (sel*in2) )" ;}
+    }
+
+    cell (D_FLIPFLOP) {
+        ff("IQ","IQN") {clocked_on:CLK;
+                        next_state:D;
+                        preset:SET;
+                        clear:RESET;}
+        pin (CLK)   {direction:input;
+                     clock:true;}
+        pin (RESET) {direction:input;}
+        pin (SET)   {direction:input;}
+        pin (D)     {direction:input;}
+        pin (Q)     {direction:output;
+                     function:"SET*RESET*IQ + (SET)'*(RESET)*";}
+        pin (NQ)    {direction:output;
+                     function:"IQN";}
+    }
+
+}

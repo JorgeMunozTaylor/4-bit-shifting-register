@@ -1,11 +1,9 @@
 /*---------------Jorge Munoz Taylor---------------*/
-/*--------------------A53863----------------------*/
-/*-----------Universidad de Costa Rica------------*/
-/*------------Circuitos Digitales 2---------------*/
+/*-----------University of Costa Rica-------------*/
+/*--------------Digital Circuits 2----------------*/
 /*-------------------I-2018-----------------------*/
 
-/*Prueba 4*/
-module Test4( /*Desplazamiento circular a la derecha*/
+module Test4( /*Circular right shifting*/
 	CLK,
 	ENB,
 	DIR,
@@ -14,7 +12,7 @@ module Test4( /*Desplazamiento circular a la derecha*/
 	D, 
 	Q,
 	S_OUT
-	);
+);
 
 	output CLK;
 	output ENB;
@@ -36,46 +34,12 @@ module Test4( /*Desplazamiento circular a la derecha*/
 	initial CLK 		= `LOW;
 	initial	ENB 		= !(`ENABLE);
 	initial DIR 		= `HIGH; 
-	initial MODO 		= `MODO_10;
-	initial #96.35 MODO = `MODO_01; //El cambio ocurre en la mitad del ciclo positivo
+	initial MODO 		= `PARA_LOAD;
+	initial #96.35 MODO = `CIRC_SHIFT; 
 	initial S_IN 		= `LOW;
 	initial D 			= 4'b0001;	
 	
-	initial
-	begin
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-
-	  	#`CLK_t4 CLK = `HIGH; 
-		#`CLK_t4 CLK = `LOW;
-	end
-
+	always  #`CLK_t4 CLK = !CLK; 
+	
 endmodule
 /*------------------------------------------------------------------*/
