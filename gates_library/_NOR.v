@@ -5,16 +5,14 @@
 /*-------------------I-2018-----------------------*/
 
 module NOR(
-    in1,
-    in2,
-    out
+    input     in1,
+    input     in2,
+    output    out
 );
-    parameter PwrC = 0;
-    input     in1;
-    input     in2;
-    output    out;
+    parameter  PwrC      = 0;
+    localparam nor_delay = `nor_delay;
 
-    assign    #`nor_delay out = ~(in1 | in2);
+    assign    #nor_delay out = ~(in1 | in2);
 
     //always @(posedge out) 
     //testbench.m1.PwrCntr[PwrC] = testbench.m1.PwrCntr[PwrC] + 1;

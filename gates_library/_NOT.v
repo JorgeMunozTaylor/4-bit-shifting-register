@@ -5,14 +5,13 @@
 /*-------------------I-2018-----------------------*/
 
 module inverter (
-    in,
-    out
+    input     in,
+    output    out
 );
-    parameter PwrC = 0;
-    input     in;
-    output    out;
+    parameter  PwrC      = 0;
+    localparam inv_delay = `inv_delay;
 
-    assign    #`inv_delay out = ~in;
+    assign    #inv_delay out = ~in;
 
     //always @(posedge out) 
     //testbench.m1.PwrCntr[PwrC] = testbench.m1.PwrCntr[PwrC] + 1;

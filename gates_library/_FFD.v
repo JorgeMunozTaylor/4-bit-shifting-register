@@ -6,41 +6,26 @@
 
 /*Asynchronous SET and RESET*/
 module D_FLIPFLOP(
-    CLK,
-    RESET,
-    SET,
-    D,
-    Q,
-    NQ 
+    input      CLK,
+    input      RESET,   //LOW active
+    input      SET,     //LOW active
+    input      D,       //Input
+    output reg Q,       //Output, follow D input
+    output     NQ      //Inverted Q 
 );
     parameter  PwrC = 0; //Counts output transitions
-    input      CLK;
-    input      RESET;   //LOW active
-    input      SET;     //LOW active
-    input      D;       //Input
-    output reg Q;       //Output, follow D input
-    output     NQ;      //Inverted Q
+    localparam T_clk_q = `T_clk_q;
 
-    assign NQ = ~Q;     
+    assign     NQ = ~Q;     
 
-    always @(*)         //Asynchronous loop
-    begin
-        if      ( SET==0 && RESET==0 ) //Avoid this situation 
-            #`T_clk_q Q <= 1;
-        else if ( SET==0 && RESET==1 )
-            #`T_clk_q Q <= 1;
-        else if ( SET==1 && RESET==0 )
-            #`T_clk_q Q <= 0;
-    end                 //End of always
+    always @(*) if      ( SET==0 && RESET==0 ) #T_clk_q Q <= 1; //Avoid this situation          
+                else if ( SET==0 && RESET==1 ) #T_clk_q Q <= 1;
+                else if ( SET==1 && RESET==0 ) #T_clk_q Q <= 0;
+    
 
-    always @(posedge CLK)
-    begin
-        if      ( SET==1 && RESET==1 && D==1 )      
-            #`T_clk_q Q <= 1;
-        else if ( SET==1 && RESET==1 && D==0 )
-            #`T_clk_q Q <= 0;
-    end                 //End of always
-
+    always @(posedge CLK)   if      ( SET==1 && RESET==1 && D==1 ) #T_clk_q Q <= 1;
+                            else if ( SET==1 && RESET==1 && D==0 ) #T_clk_q Q <= 0;
+    
     //always @(posedge Q) 
     //testbench.m1.PwrCntr[PwrC] = testbench.m1.PwrCntr[PwrC] + 1;
 

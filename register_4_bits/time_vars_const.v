@@ -4,6 +4,7 @@
 /*-------------------I-2018-----------------------*/
 
 `ifndef TIMESCALE
+    `define TIMESCALE
     `timescale 1ns/100ps
 `endif
 

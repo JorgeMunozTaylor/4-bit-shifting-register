@@ -10,6 +10,8 @@
 
 module testbench;
 
+	parameter	t_final = `t_final;
+
     wire [9:0] CLK;
     wire [9:0] ENB;
     wire [9:0] DIR;
@@ -22,13 +24,6 @@ module testbench;
 
     wire [4:0] S_OUT_0;   
     //wire [4:0] S_OUT_1;   
-
-`ifdef TRANSITIONS_POWER_V
-    wire [31:0] Contador;
-    wire [31:0] dato;
-    wire [`Ndir:0] dir;
-    wire LE;
-`endif
 
 /*-------------------------------------------------*/
 `ifdef TEST1_V
@@ -190,6 +185,11 @@ register4 register_4(
 `endif
 
 `ifdef TRANSITIONS_POWER_V
+	parameter		Ndir = `Ndir;
+    wire [31:0] 	Contador;
+    wire [31:0] 	dato;
+    wire [Ndir:0] 	dir;
+    wire 			LE;
 	/*Circuit output transitions*/
     memTrans m1 (dir, LE, dato);
     assign dato = (~LE)? Contador : 32'bz;
@@ -212,6 +212,6 @@ begin
 end
 
 initial
-    #`t_final $finish;
+    #t_final $finish;
 
 endmodule

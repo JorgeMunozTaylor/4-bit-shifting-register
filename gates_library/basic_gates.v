@@ -39,25 +39,31 @@
 
 /*--------------------Includes--------------------*/
 `ifndef _BUFFER_V
+    `define _BUFFER_V
     `include "./gates_library/_BUFFER.v"
 `endif 
 
 `ifndef _NOT_V
+    `define _NOT_V
     `include "./gates_library/_NOT.v"
 `endif
 
 `ifndef _NAND_V
+    `define _NAND_V
     `include "./gates_library/_NAND.v"
 `endif
 
 `ifndef _NOR_V
+    `define _NOR_V
     `include "./gates_library/_NOR.v"
 `endif
 
 `ifndef _MUX_V
+    `define _MUX_V
     `include "./gates_library/_MUX.v"
 `endif
 
 `ifndef _FFD_V
+    `define _FFD_V
     `include "./gates_library/_FFD.v"
 `endif
